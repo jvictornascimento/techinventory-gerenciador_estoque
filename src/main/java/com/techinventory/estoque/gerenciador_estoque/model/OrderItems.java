@@ -15,8 +15,9 @@ public class OrderItems implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private int quantity;
+    @ManyToOne
     private Order order;
-    private Product product;
+   private Product product;
 
     public UUID getId() {
         return id;

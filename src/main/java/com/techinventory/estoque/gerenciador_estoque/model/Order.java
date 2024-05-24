@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 @Entity
@@ -15,6 +16,9 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private LocalDateTime date;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItems> orderItems;
 
     public UUID getId() {
         return id;
