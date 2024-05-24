@@ -4,6 +4,7 @@ import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryDTO;
 import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryInsertDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Category;
 import com.techinventory.estoque.gerenciador_estoque.repositories.CategoryRepository;
+import com.techinventory.estoque.gerenciador_estoque.services.exceptions.CategoryNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,8 @@ public class CategoryService {
     }
 
     public Category findById(UUID id){
-        return categoryRepository.findById(id).get();
+        return categoryRepository.findById(id).
+                orElseThrow(CategoryNotFoundException :: new);
     }
 
     public Category save(CategoryInsertDTO categoryInsertDTO){
