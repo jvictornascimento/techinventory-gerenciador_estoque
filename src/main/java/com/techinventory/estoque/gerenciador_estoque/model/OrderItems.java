@@ -17,6 +17,7 @@ public class OrderItems implements Serializable {
     private int quantity;
     @ManyToOne
     private Order order;
+   @ManyToOne
    private Product product;
 
     public UUID getId() {

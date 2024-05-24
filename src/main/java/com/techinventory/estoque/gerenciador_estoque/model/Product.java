@@ -3,6 +3,7 @@ package com.techinventory.estoque.gerenciador_estoque.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -19,6 +20,8 @@ public class Product implements Serializable {
     private Double price;
     @ManyToOne
     private Category category;
+    @OneToMany(mappedBy = "product")
+    private List<OrderItems> orderItems;
 
     public UUID getId() {
         return id;
