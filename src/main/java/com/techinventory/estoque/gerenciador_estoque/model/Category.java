@@ -17,7 +17,7 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     private List<Product> products;
 
     public UUID getId() {

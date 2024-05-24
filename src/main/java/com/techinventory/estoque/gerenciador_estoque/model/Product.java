@@ -17,7 +17,7 @@ public class Product implements Serializable {
     private String description;
     private int quantity;
     private Double price;
-    @OneToOne
+    @ManyToOne
     private Category category;
 
     public UUID getId() {
