@@ -2,19 +2,23 @@ package com.techinventory.estoque.gerenciador_estoque.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "TB_PRODUCT")
 
-public class Product {
+public class Product implements Serializable {
+    private static final long serialVersionUID=1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String description;
     private int quantity;
     private Double price;
+    @OneToOne
+    private Category category;
 
     public UUID getId() {
         return id;
@@ -44,6 +48,14 @@ public class Product {
         return price;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,6 +81,7 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", quantity=" + quantity +
                 ", price=" + price +
+                ", category=" + category +
                 '}';
     }
 }
