@@ -1,6 +1,6 @@
 package com.techinventory.estoque.gerenciador_estoque.services;
 
-import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryDTO;
+import com.techinventory.estoque.gerenciador_estoque.dtos.category.CategoryDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Category;
 import com.techinventory.estoque.gerenciador_estoque.repositories.CategoryRepository;
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.CategoryNotFoundException;

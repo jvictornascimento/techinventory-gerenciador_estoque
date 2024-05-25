@@ -1,6 +1,6 @@
 package com.techinventory.estoque.gerenciador_estoque.controllers;
 
-import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryDTO;
+import com.techinventory.estoque.gerenciador_estoque.dtos.category.CategoryDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Category;
 import com.techinventory.estoque.gerenciador_estoque.services.CategoryService;
 import jakarta.validation.Valid;

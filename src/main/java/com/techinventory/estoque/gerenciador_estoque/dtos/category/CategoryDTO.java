@@ -1,4 +1,4 @@
-package com.techinventory.estoque.gerenciador_estoque.dtos.Category;
+package com.techinventory.estoque.gerenciador_estoque.dtos.category;
 
 import jakarta.validation.constraints.NotBlank;
 

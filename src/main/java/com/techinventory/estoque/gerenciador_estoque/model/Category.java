@@ -1,5 +1,6 @@
 package com.techinventory.estoque.gerenciador_estoque.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
