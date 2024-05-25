@@ -1,7 +1,7 @@
 package com.techinventory.estoque.gerenciador_estoque.services;
 
+import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryEditDTO;
 import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryDTO;
-import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryInsertDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Category;
 import com.techinventory.estoque.gerenciador_estoque.repositories.CategoryRepository;
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.CategoryNotFoundException;
@@ -27,10 +27,17 @@ public class CategoryService {
                 orElseThrow(CategoryNotFoundException :: new);
     }
 
-    public Category save(CategoryInsertDTO categoryInsertDTO){
+    public Category save(CategoryDTO categoryDTO){
         var category = new Category();
-        BeanUtils.copyProperties(categoryInsertDTO,category);
+        BeanUtils.copyProperties(categoryDTO,category);
         return categoryRepository.save(category);
+    }
+
+    public Category edit(CategoryDTO categoryDTO,UUID id){
+        var data = categoryRepository.findById(id)
+                .orElseThrow(CategoryNotFoundException :: new);
+        BeanUtils.copyProperties(categoryDTO,data);
+        return categoryRepository.save(data);
     }
 
 }
