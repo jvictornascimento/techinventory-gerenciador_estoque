@@ -1,6 +1,5 @@
 package com.techinventory.estoque.gerenciador_estoque.services;
 
-import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryEditDTO;
 import com.techinventory.estoque.gerenciador_estoque.dtos.Category.CategoryDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Category;
 import com.techinventory.estoque.gerenciador_estoque.repositories.CategoryRepository;

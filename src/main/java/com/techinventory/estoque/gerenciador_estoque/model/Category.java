@@ -1,7 +1,6 @@
 package com.techinventory.estoque.gerenciador_estoque.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.List;
