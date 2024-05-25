@@ -40,4 +40,13 @@ public class CategoryService {
         return categoryRepository.save(data);
     }
 
+    public String delete(UUID id){
+        if (categoryRepository.existsById(id)){
+            categoryRepository.deleteById(id);
+            return "Category deleted sucessfully";
+        }
+       throw new CategoryNotFoundException();
+
+    }
+
 }
