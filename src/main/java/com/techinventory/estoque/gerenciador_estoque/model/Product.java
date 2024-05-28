@@ -1,6 +1,7 @@
 package com.techinventory.estoque.gerenciador_estoque.model;
 
 import jakarta.persistence.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "TB_PRODUCT")
 
-public class Product implements Serializable {
+public class Product extends RepresentationModel<Product> implements Serializable {
     private static final long serialVersionUID=1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,5 +1,7 @@
 package com.techinventory.estoque.gerenciador_estoque.services;
 
+import com.techinventory.estoque.gerenciador_estoque.controllers.CategoryController;
+import com.techinventory.estoque.gerenciador_estoque.controllers.ProductController;
 import com.techinventory.estoque.gerenciador_estoque.dtos.products.ProductDTO;
 import com.techinventory.estoque.gerenciador_estoque.dtos.products.ProductUpdateDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Category;
@@ -14,6 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Service
 
 public class ProductService {
@@ -22,12 +27,22 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public List<Product> findAll(){
-        return productRepository.findAll();
+       var products = productRepository.findAll();
+        for (Product product : products){
+            UUID id = product.getId();
+            product.add(linkTo(methodOn(ProductController.class).getOneProduct(id)).withSelfRel());
+            product.getCategory().add(linkTo(methodOn(CategoryController.class).getOneCategory(product.getCategory().getId())).withSelfRel());
+        }
+        return products;
     }
 
     public Product findById(UUID id){
-        return productRepository.findById(id)
+        var product = productRepository.findById(id)
                 .orElseThrow(CategoryNotFoundException::new);
+        product.add(linkTo(methodOn(ProductController.class).getAllProduct()).withRel("Product List"));
+        product.getCategory().add(linkTo(methodOn(CategoryController.class).getOneCategory(product.getCategory().getId())).withSelfRel());
+        return product;
+
     }
 
     public Product save(ProductDTO productDTO){
