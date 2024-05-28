@@ -2,6 +2,7 @@ package com.techinventory.estoque.gerenciador_estoque.services;
 
 import com.techinventory.estoque.gerenciador_estoque.dtos.products.ProductDTO;
 import com.techinventory.estoque.gerenciador_estoque.dtos.products.ProductUpdateDTO;
+import com.techinventory.estoque.gerenciador_estoque.model.Category;
 import com.techinventory.estoque.gerenciador_estoque.model.Product;
 import com.techinventory.estoque.gerenciador_estoque.repositories.ProductRepository;
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.CategoryNotFoundException;
@@ -36,10 +37,7 @@ public class ProductService {
     }
 
     public Product edit(ProductUpdateDTO productUpdateDTO, UUID id){
-        var data = productRepository.findById(id)
-                .orElseThrow(ProductNotFoundException::new);
-        BeanUtils.copyProperties(productUpdateDTO,data,"id");
-        return productRepository.save(data);
+        return productRepository.save(updateData(productUpdateDTO,id));
     }
 
     public String delete(UUID id){
@@ -48,6 +46,16 @@ public class ProductService {
             return "product deleted sucessfully";
         }
         throw new ProductNotFoundException("Product not found");
+    }
+
+    private Product updateData(ProductUpdateDTO productUpdateDTO, UUID id){
+        var data = productRepository.findById(id)
+                .orElseThrow(ProductNotFoundException::new);
+        data.setDescription((productUpdateDTO.description()!=null&&!productUpdateDTO.description().isEmpty())?productUpdateDTO.description():data.getDescription());
+        data.setQuantity((productUpdateDTO.quantity()!=null)?productUpdateDTO.quantity(): data.getQuantity());
+        data.setPrice((productUpdateDTO.price()!=null)?productUpdateDTO.price(): data.getPrice());
+        data.setCategory((productUpdateDTO.category()!=null)?productUpdateDTO.category():data.getCategory());
+        return data;
     }
 
 }

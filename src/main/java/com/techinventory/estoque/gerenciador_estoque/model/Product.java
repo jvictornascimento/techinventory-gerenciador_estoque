@@ -16,7 +16,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String description;
-    private int quantity;
+    private Integer quantity;
     private Double price;
     @ManyToOne
     private Category category;

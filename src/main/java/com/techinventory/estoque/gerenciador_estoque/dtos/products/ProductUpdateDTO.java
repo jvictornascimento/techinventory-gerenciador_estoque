@@ -6,5 +6,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record ProductUpdateDTO(String description, int quantity, Double price, Category category){
+public record ProductUpdateDTO(String description, Integer quantity, Double price, Category category){
 }

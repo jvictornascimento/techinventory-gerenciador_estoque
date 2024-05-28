@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record ProductDTO (@NotBlank String description,
-                          int quantity,
+                          Integer quantity,
                           @NotNull Double price,
                           Category category){
 }
