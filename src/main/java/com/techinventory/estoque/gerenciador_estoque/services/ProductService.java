@@ -6,6 +6,7 @@ import com.techinventory.estoque.gerenciador_estoque.dtos.products.ProductDTO;
 import com.techinventory.estoque.gerenciador_estoque.dtos.products.ProductUpdateDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Category;
 import com.techinventory.estoque.gerenciador_estoque.model.Product;
+import com.techinventory.estoque.gerenciador_estoque.repositories.CategoryRepository;
 import com.techinventory.estoque.gerenciador_estoque.repositories.ProductRepository;
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.CategoryNotFoundException;
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.ProductNotFoundException;
@@ -25,6 +26,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public List<Product> findAll(){
        var products = productRepository.findAll();
@@ -46,6 +50,10 @@ public class ProductService {
     }
 
     public Product save(ProductDTO productDTO){
+        UUID idCategory  = productDTO.category().getId();
+        if (!categoryRepository.existsById(idCategory)){
+            throw new CategoryNotFoundException();
+        }
         var product = new Product();
         BeanUtils.copyProperties(productDTO,product);
         return productRepository.save(product);
