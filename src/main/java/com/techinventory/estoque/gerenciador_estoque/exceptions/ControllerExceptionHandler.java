@@ -1,6 +1,7 @@
 package com.techinventory.estoque.gerenciador_estoque.exceptions;
 
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.CategoryNotFoundException;
+import com.techinventory.estoque.gerenciador_estoque.services.exceptions.ClientNotFoundException;
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.ProductNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,14 @@ public class ControllerExceptionHandler {
         String error = "Product not found ";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(Instant.now(),status.value(),error,e.getMessage(),request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ClientNotFoundException.class)
+    public ResponseEntity<StandardError> ClientNotFound(ClientNotFoundException e, HttpServletRequest request) {
+        String error = "Client not found ";
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 
