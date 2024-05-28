@@ -42,4 +42,12 @@ public class ProductService {
         return productRepository.save(data);
     }
 
+    public String delete(UUID id){
+        if(productRepository.existsById(id)){
+            productRepository.deleteById(id);
+            return "product deleted sucessfully";
+        }
+        throw new ProductNotFoundException("Product not found");
+    }
+
 }
