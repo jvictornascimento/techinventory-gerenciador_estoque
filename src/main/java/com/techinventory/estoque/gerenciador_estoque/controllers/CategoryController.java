@@ -25,7 +25,7 @@ public class CategoryController {
                 .body(categoryService.findAll());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getOneCategory(@PathVariable UUID id){
+    public ResponseEntity<Category> getOneCategory(@PathVariable(value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(categoryService.findById(id));
 
@@ -37,12 +37,12 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@RequestBody @Valid CategoryDTO categoryDTO, @PathVariable UUID id){
+    public ResponseEntity<Category> updateCategory(@RequestBody @Valid CategoryDTO categoryDTO, @PathVariable(value = "id") UUID id){
             return ResponseEntity.status(HttpStatus.OK)
                     .body(categoryService.edit(categoryDTO,id));
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteCategoy(@PathVariable UUID id){
+    public ResponseEntity<Object> deleteCategoy(@PathVariable(value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(categoryService.delete(id));
     }

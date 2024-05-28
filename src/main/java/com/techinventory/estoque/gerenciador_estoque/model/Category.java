@@ -19,6 +19,7 @@ public class Category extends RepresentationModel<Category> implements Serializa
     private UUID id;
     private String name;
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Product> products;
 
     public UUID getId() {
