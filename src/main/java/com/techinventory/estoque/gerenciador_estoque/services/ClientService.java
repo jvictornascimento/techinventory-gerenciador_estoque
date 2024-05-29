@@ -38,6 +38,14 @@ public class ClientService {
         return updateData(clientUpdateDTO,id);
     }
 
+    public String delete(UUID id){
+        if (!clientRepository.existsById(id)){
+            throw new ClientNotFoundException();
+        }
+        clientRepository.deleteById(id);
+        return "Client deleted sucessfully";
+    }
+
 
     private Client updateData(ClientUpdateDTO clientUpdateDTO, UUID uuid){
         var data = clientRepository.findById(uuid)

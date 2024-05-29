@@ -46,4 +46,10 @@ public class ClientController {
                 .body(clientService.edit(clientUpdateDTO,id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteClient(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(clientService.delete(id));
+    }
+
 }
