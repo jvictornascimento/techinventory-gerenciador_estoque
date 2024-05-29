@@ -1,6 +1,7 @@
 package com.techinventory.estoque.gerenciador_estoque.controllers;
 
 import com.techinventory.estoque.gerenciador_estoque.dtos.client.ClientDTO;
+import com.techinventory.estoque.gerenciador_estoque.dtos.client.ClientUpdateDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Client;
 import com.techinventory.estoque.gerenciador_estoque.services.ClientService;
 import jakarta.validation.Valid;
@@ -37,6 +38,12 @@ public class ClientController {
     public ResponseEntity<Client> saveClient(@RequestBody @Valid ClientDTO clientDTO){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(clientService.save(clientDTO));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Client> editClient(@RequestBody @Valid ClientUpdateDTO clientUpdateDTO, @PathVariable(name = "id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(clientService.edit(clientUpdateDTO,id));
     }
 
 }

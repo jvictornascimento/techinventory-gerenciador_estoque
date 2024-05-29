@@ -1,6 +1,7 @@
 package com.techinventory.estoque.gerenciador_estoque.services;
 
 import com.techinventory.estoque.gerenciador_estoque.dtos.client.ClientDTO;
+import com.techinventory.estoque.gerenciador_estoque.dtos.client.ClientUpdateDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Client;
 import com.techinventory.estoque.gerenciador_estoque.repositories.ClientRepository;
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.ClientNotFoundException;
@@ -33,7 +34,18 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
+    public Client edit(ClientUpdateDTO clientUpdateDTO, UUID id){
+        return updateData(clientUpdateDTO,id);
+    }
 
+
+    private Client updateData(ClientUpdateDTO clientUpdateDTO, UUID uuid){
+        var data = clientRepository.findById(uuid)
+                .orElseThrow(ClientNotFoundException :: new);
+        data.setName((clientUpdateDTO.name()!=null)?clientUpdateDTO.name():data.getName());
+        data.setEmail((clientUpdateDTO.email()!=null)?clientUpdateDTO.email(): data.getEmail());
+        return clientRepository.save(data);
+    }
 
 
 }
