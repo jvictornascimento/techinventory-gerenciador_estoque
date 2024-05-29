@@ -4,7 +4,6 @@ import com.techinventory.estoque.gerenciador_estoque.controllers.CategoryControl
 import com.techinventory.estoque.gerenciador_estoque.controllers.ProductController;
 import com.techinventory.estoque.gerenciador_estoque.dtos.products.ProductDTO;
 import com.techinventory.estoque.gerenciador_estoque.dtos.products.ProductUpdateDTO;
-import com.techinventory.estoque.gerenciador_estoque.model.Category;
 import com.techinventory.estoque.gerenciador_estoque.model.Product;
 import com.techinventory.estoque.gerenciador_estoque.repositories.CategoryRepository;
 import com.techinventory.estoque.gerenciador_estoque.repositories.ProductRepository;
