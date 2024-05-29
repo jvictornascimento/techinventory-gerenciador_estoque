@@ -1,14 +1,14 @@
 package com.techinventory.estoque.gerenciador_estoque.controllers;
 
+import com.techinventory.estoque.gerenciador_estoque.dtos.order.OrderDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Order;
 import com.techinventory.estoque.gerenciador_estoque.services.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,4 +30,10 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(orderService.findById(id));
     }
-        }
+    @PostMapping
+    public ResponseEntity<Order> saveOrder(@RequestBody @Valid OrderDTO orderDTO){
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(orderService.save(orderDTO));
+    }
+
+}

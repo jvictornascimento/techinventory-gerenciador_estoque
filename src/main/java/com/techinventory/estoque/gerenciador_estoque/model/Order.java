@@ -40,11 +40,29 @@ public class Order implements Serializable {
         this.date = date;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<OrderItems> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItems> orderItems) {
+        this.orderItems = orderItems;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", date=" + date +
+                ", client=" + client +
+                ", orderItems=" + orderItems +
                 '}';
     }
 
