@@ -42,7 +42,7 @@ public class ProductService {
 
     public Product findById(UUID id){
         var product = productRepository.findById(id)
-                .orElseThrow(CategoryNotFoundException::new);
+                .orElseThrow(ProductNotFoundException::new);
         product.add(linkTo(methodOn(ProductController.class).getAllProduct()).withRel("Product List"));
         product.getCategory().add(linkTo(methodOn(CategoryController.class).getOneCategory(product.getCategory().getId())).withSelfRel());
         return product;

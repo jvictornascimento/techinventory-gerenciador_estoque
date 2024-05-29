@@ -17,6 +17,10 @@ public class Order implements Serializable {
     private UUID id;
     private LocalDateTime date;
 
+
+    @ManyToOne
+    private Client client;
+
     @OneToMany(mappedBy = "order")
     private List<OrderItems> orderItems;
 
