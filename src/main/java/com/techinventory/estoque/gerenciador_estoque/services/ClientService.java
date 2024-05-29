@@ -1,5 +1,6 @@
 package com.techinventory.estoque.gerenciador_estoque.services;
 
+import com.techinventory.estoque.gerenciador_estoque.controllers.ClientController;
 import com.techinventory.estoque.gerenciador_estoque.dtos.client.ClientDTO;
 import com.techinventory.estoque.gerenciador_estoque.dtos.client.ClientUpdateDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Client;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Service
 public class ClientService {
 
@@ -20,12 +24,19 @@ public class ClientService {
 
 
     public List<Client> findAll(){
-        return clientRepository.findAll();
+        var clients = clientRepository.findAll();
+        for(Client client : clients){
+            UUID id = client.getUuid();
+            client.add(linkTo(methodOn(ClientController.class).getOneClient(id)).withSelfRel());
+        }
+        return clients;
+
     }
 
     public Client findById(UUID id){
         return clientRepository.findById(id).
-                orElseThrow(ClientNotFoundException :: new);
+                orElseThrow(ClientNotFoundException :: new)
+                .add(linkTo(methodOn(ClientController.class).getAllClient()).withRel("Client list"));
     }
 
     public Client save (ClientDTO clientDTO){

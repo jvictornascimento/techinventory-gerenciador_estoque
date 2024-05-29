@@ -2,6 +2,7 @@ package com.techinventory.estoque.gerenciador_estoque.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "TB_CLIENTS")
 
-public class Client implements Serializable {
+public class Client extends RepresentationModel<Client> implements Serializable {
     private static final long serialVersionUID=1L;
 
     @Id
