@@ -1,8 +1,10 @@
 package com.techinventory.estoque.gerenciador_estoque.services;
 
+import com.techinventory.estoque.gerenciador_estoque.dtos.client.ClientDTO;
 import com.techinventory.estoque.gerenciador_estoque.model.Client;
 import com.techinventory.estoque.gerenciador_estoque.repositories.ClientRepository;
 import com.techinventory.estoque.gerenciador_estoque.services.exceptions.ClientNotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,14 @@ public class ClientService {
         return clientRepository.findById(id).
                 orElseThrow(ClientNotFoundException :: new);
     }
+
+    public Client save (ClientDTO clientDTO){
+        var client = new Client();
+        BeanUtils.copyProperties(clientDTO,client);
+        return clientRepository.save(client);
+    }
+
+
 
 
 }
